@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Clarity·Protocol – Investing Psychology Coaching</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Fonts [web:11][web:12] -->
+  //fonts.googleapis.com" />
+  //fonts.gstatic.com" crossorigin />
+  //fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      --aurora-1: #4338ca;
+      --aurora-2: #7c3aed;
+      --aurora-3: #be185d;
+      --c-ink: #0f172a;
+      --c-ink-2: #334155;
+      --c-ink-3: #64748b;
+      --c-surface: #ffffff;
+      --c-bg: #f8fafc;
+      --c-border: #e2e8f0;
+      --c-accent: #4f46e5;
+
+      --radius-card: 16px;
+      --shadow-card: 0 18px 45px rgba(15, 23, 42, 0.12);
+
+      --nav-height: 72px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      color: var(--c-ink);
+      background: var(--c-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page-wrap {
+      min-height: 100vh;
+      background: var(--c-bg);
+    }
+
+    /* UTILITIES */
+
+    .container {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: rgba(15, 23, 42, 0.6);
+    }
+
+    .section {
+      padding: 96px 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Fraunces", "Times New Roman", serif;
+      margin: 0;
+      color: var(--c-ink);
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--c-ink-2);
+      font-size: 0.98rem;
+      line-height: 1.6;
+    }
+
+    .muted {
+      color: var(--c-ink-3);
+      font-size: 0.85rem;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--c-ink-3);
+      background: rgba(15, 23, 42, 0.02);
+    }
+
+    .badge-pill--red {
+      border-color: rgba(248, 113, 113, 0.6);
+      color: #b91c1c;
+      background: rgba(254, 226, 226, 0.7);
+    }
+
+    .badge-pill--green {
+      border-color: rgba(52, 211, 153, 0.6);
+      color: #166534;
+      background: rgba(209, 250, 229, 0.8);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stack-s {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .stack-m {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .stack-l {
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+
+    /* NAV */
+
+    .nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: var(--nav-height);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.9),
+        rgba(15, 23, 42, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #e5e7eb;
+    }
+
+    .logo span {
+      color: #a78bfa;
+    }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: #ffffff;
+      color: var(--c-accent);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.3);
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease,
+        background-color 160ms ease;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.38);
+      background: #f9fafb;
+    }
+
+    /* HERO */
+
+    .hero {
+      position: relative;
+      padding-top: calc(var(--nav-height) + 40px);
+      padding-bottom: 88px;
+      color: #e5e7eb;
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 20% 10%,
+          rgba(67, 56, 202, 0.35) 0%,
+          transparent 60%
+        ),
+        radial-gradient(
+          ellipse 60% 50% at 80% 20%,
+          rgba(124, 58, 237, 0.28) 0%,
+          transparent 55%
+        ),
+        radial-gradient(
+          ellipse 50% 70% at 55% 90%,
+          rgba(190, 24, 93, 0.2) 0%,
+          transparent 65%
+        ),
+        linear-gradient(135deg, #0d0b2b 0%, #16103d 40%, #1a0b2e 100%);
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr);
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin-top: 1.25rem;
+      font-size: 2.8rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-style: italic;
+      color: #f9fafb;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #e5e7eb;
+    }
+
+    .hero-note {
+      margin-top: 0.35rem;
+      color: rgba(148, 163, 184, 0.9);
+      font-size: 0.8rem;
+    }
+
+    .hero-ctas {
+      margin-top: 1.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 1.4rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 140ms ease, box-shadow 140ms ease,
+        background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+      text-align: center;
+    }
+
+    .btn-primary-light {
+      background: #ffffff;
+      color: var(--c-accent);
+      box-shadow: 0 16px 45px rgba(15, 23, 42, 0.4);
+    }
+
+    .btn-primary-light:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 60px rgba(15, 23, 42, 0.5);
+      background: #f9fafb;
+    }
+
+    .btn-outline-light {
+      border-color: rgba(148, 163, 184, 0.75);
+      color: #e5e7eb;
+      background: transparent;
+    }
+
+    .btn-outline-light:hover {
+      border-color: #e5e7eb;
+      background: rgba(15, 23, 42, 0.3);
+    }
+
+    .hero-aside {
+      position: relative;
+    }
+
+    .hero-panel {
+      position: relative;
+      border-radius: var(--radius-card);
+      padding: 1.5rem 1.75rem;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-panel h3 {
+      color: #e5e7eb;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-panel p {
+      color: #cbd5f5;
+      font-size: 0.9rem;
+    }
+
+    .stats-bar {
+      margin-top: 2.3rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .stat {
+      font-size: 0.85rem;
+      color: #e5e7eb;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(148, 163, 184, 0.9);
+      margin-bottom: 0.15rem;
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+
+    /* Aurora Orbs */
+
+    .aurora-orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(40px);
+      opacity: 0.7;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      animation: orbPulse 18s ease-in-out infinite alternate;
+    }
+
+    .aurora-orb--1 {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle at 30% 30%, #4f46e5, transparent 60%);
+      top: -60px;
+      right: -40px;
+      animation-delay: 0s;
+    }
+
+    .aurora-orb--2 {
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 30% 30%, #7c3aed, transparent 65%);
+      bottom: -40px;
+      left: 10%;
+      animation-delay: 4s;
+    }
+
+    .aurora-orb--3 {
+      width: 190px;
+      height: 190px;
+      background: radial-gradient(circle at 40% 40%, #be185d, transparent 70%);
+      top: 30%;
+      left: 50%;
+      animation-delay: 8s;
+    }
+
+    @keyframes orbPulse {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate3d(10px, -8px, 0) scale(1.08);
+        opacity: 0.85;
+      }
+      100% {
+        transform: translate3d(-12px, 10px, 0) scale(0.95);
+        opacity: 0.6;
+      }
+    }
+
+    /* CARDS */
+
+    .card {
+      background: var(--c-surface);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--c-border);
+      box-shadow: var(--shadow-card);
+      padding: 1.4rem 1.4rem 1.5rem;
+      transition: transform 160ms ease, box-shadow 160ms ease,
+        border-color 160ms ease, background-color 160ms ease;
+    }
+
+    .card-hover {
+      cursor: default;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 65px rgba(15, 23, 42, 0.14);
+      border-color: rgba(129, 140, 248, 0.9);
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      background: rgba(79, 70, 229, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-heading {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: var(--c-ink);
+    }
+
+    .card p {
+      font-size: 0.9rem;
+    }
+
+    .card-dark {
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 20% 10%,
+          rgba(67, 56, 202, 0.32) 0%,
+          transparent 60%
+        ),
+        radial-gradient(
+          ellipse 60% 50% at 80% 20%,
+          rgba(124, 58, 237, 0.24) 0%,
+          transparent 55%
+        ),
+        radial-gradient(
+          ellipse 50% 70% at 55% 90%,
+          rgba(190, 24, 93, 0.18) 0%,
+          transparent 65%
+        ),
+        linear-gradient(135deg, #020617 0%, #020617 100%);
+      border-color: rgba(148, 163, 184, 0.5);
+      color: #e5e7eb;
+      box-shadow: 0 26px 70px rgba(15, 23, 42, 0.8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-dark h3,
+    .card-dark p {
+      color: #e5e7eb;
+    }
+
+    /* BENEFITS */
+
+    .section-benefits {
+      background: var(--c-bg);
+    }
+
+    .benefit-desc {
+      max-width: 620px;
+    }
+
+    /* IS THIS YOU */
+
+    .section-isyou {
+      background: #ffffff;
+    }
+
+    .isyou-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .isyou-title {
+      font-size: 1.8rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.3rem;
+    }
+
+    .isyou-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .isyou-list li {
+      position: relative;
+      padding-left: 1.4rem;
+      font-size: 0.95rem;
+      color: var(--c-ink-2);
+    }
+
+    .isyou-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0.2rem;
+      top: 0;
+      font-size: 1.1rem;
+      color: var(--c-accent);
+    }
+
+    .sticky-col {
+      position: sticky;
+      top: calc(var(--nav-height) + 24px);
+    }
+
+    .quote-card {
+      padding: 1.6rem 1.6rem 1.5rem;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--c-border);
+      background: linear-gradient(
+        135deg,
+        rgba(248, 250, 252, 1) 0%,
+        rgba(239, 246, 255, 0.9) 100%
+      );
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    .quote-text {
+      font-family: "Fraunces", serif;
+      font-size: 1.05rem;
+      line-height: 1.5;
+      color: var(--c-ink);
+      margin-bottom: 0.8rem;
+    }
+
+    .quote-meta {
+      font-size: 0.85rem;
+      color: var(--c-ink-3);
+    }
+
+    /* METHOD */
+
+    .section-method {
+      background: var(--c-bg);
+    }
+
+    .method-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 2rem;
+    }
+
+    .method-subline {
+      max-width: 520px;
+    }
+
+    .method-steps-wrap {
+      position: relative;
+    }
+
+    .method-connector {
+      position: absolute;
+      inset: 50% 6% auto 6%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--aurora-1),
+        var(--aurora-2),
+        var(--aurora-3)
+      );
+      transform: translateY(-50%);
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    .method-steps {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      z-index: 1;
+    }
+
+    .method-step {
+      padding: 1.15rem 1.05rem 1.2rem;
+      border-radius: 14px;
+      border: 1px solid var(--c-border);
+      background: #ffffff;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.06);
+      font-size: 0.86rem;
+    }
+
+    .method-step-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--c-accent);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    .method-step-title {
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: var(--c-ink);
+      font-size: 0.95rem;
+    }
+
+    /* DELIVERABLES */
+
+    .section-deliverables {
+      background: #ffffff;
+    }
+
+    .deliverables-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.4rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .deliverables-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--c-ink-2);
+    }
+
+    .check-icon {
+      margin-top: 0.1rem;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: linear-gradient(
+        135deg,
+        var(--aurora-1),
+        var(--aurora-2),
+        var(--aurora-3)
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 0.75rem;
+      box-shadow: 0 8px 18px rgba(79, 70, 229, 0.55);
+      flex-shrink: 0;
+    }
+
+    .timeline-card {
+      padding: 1.6rem 1.6rem 1.4rem;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.7);
+      position: relative;
+      overflow: hidden;
+      color: #e5e7eb;
+    }
+
+    .timeline-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      font-size: 0.9rem;
+    }
+
+    .timeline-item-label {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .timeline-item-text {
+      color: #cbd5f5;
+    }
+
+    /* WHY ME */
+
+    .section-why {
+      background: var(--c-bg);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 32px;
+      align-items: flex-start;
+    }
+
+    .why-bio {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .why-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .why-card {
+      padding: 1rem 1.1rem 1.05rem;
+      border-radius: 12px;
+      border: 1px solid var(--c-border);
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+      font-size: 0.9rem;
+    }
+
+    .why-card-title {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--c-ink);
+    }
+
+    /* SOCIAL PROOF */
+
+    .section-social {
+      background: #ffffff;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 28px;
+      align-items: flex-start;
+    }
+
+    .testimonial-cols {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .testimonial-card {
+      padding: 1.1rem 1.2rem;
+      border-radius: 14px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: #f8fafc;
+      font-size: 0.9rem;
+      color: var(--c-ink-3);
+    }
+
+    .testimonial-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-ink-3);
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+    }
+
+    .ba-card {
+      padding: 1.2rem 1.3rem 1.1rem;
+      border-radius: 14px;
+      border: 1px solid var(--c-border);
+      background: #f9fafb;
+      font-size: 0.9rem;
+    }
+
+    .ba-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    /* FINAL CTA */
+
+    .section-final-cta {
+      position: relative;
+      padding: 80px 0 88px;
+      color: #e5e7eb;
+      background:
+        radial-gradient(
+          ellipse 80% 60% at 20% 10%,
+          rgba(67, 56, 202, 0.35) 0%,
+          transparent 60%
+        ),
+        radial-gradient(
+          ellipse 60% 50% at 80% 20%,
+          rgba(124, 58, 237, 0.28) 0%,
+          transparent 55%
+        ),
+        radial-gradient(
+          ellipse 50% 70% at 55% 90%,
+          rgba(190, 24, 93, 0.2) 0%,
+          transparent 65%
+        ),
+        linear-gradient(135deg, #0d0b2b 0%, #16103d 40%, #1a0b2e 100%);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .final-heading {
+      font-family: "Fraunces", serif;
+      font-size: 2.1rem;
+      letter-spacing: -0.03em;
+      color: #f9fafb;
+      margin-bottom: 0.75rem;
+    }
+
+    .final-sub {
+      max-width: 540px;
+      margin: 0 auto;
+      font-size: 0.98rem;
+      color: #e5e7eb;
+    }
+
+    .final-note {
+      margin-top: 0.7rem;
+      font-size: 0.8rem;
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    .final-cta-btn {
+      margin-top: 1.7rem;
+      min-width: 220px;
+    }
+
+    .final-orb-1,
+    .final-orb-2,
+    .final-orb-3 {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(38px);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+      pointer-events: none;
+      animation: orbPulse 18s ease-in-out infinite alternate;
+    }
+
+    .final-orb-1 {
+      width: 240px;
+      height: 240px;
+      background: radial-gradient(circle at 30% 30%, #4f46e5, transparent 65%);
+      top: -60px;
+      left: -40px;
+    }
+
+    .final-orb-2 {
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle at 40% 40%, #7c3aed, transparent 70%);
+      bottom: -40px;
+      right: -20px;
+      animation-delay: 5s;
+    }
+
+    .final-orb-3 {
+      width: 180px;
+      height: 180px;
+      background: radial-gradient(circle at 40% 40%, #be185d, transparent 70%);
+      top: 40%;
+      left: 55%;
+      animation-delay: 9s;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      background: #020617;
+      color: #6b7280;
+      padding: 28px 0 32px;
+      font-size: 0.8rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .footer-logo {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      color: #e5e7eb;
+    }
+
+    .footer-logo span {
+      color: #a78bfa;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
+      transition: color 140ms ease;
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+
+    /* SCROLL REVEAL */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 600ms ease, transform 600ms ease;
+      will-change: opacity, transform;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 992px) {
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px;
+      }
+
+      .hero-panel {
+        margin-top: 8px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      .hero {
+        padding-bottom: 80px;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .method-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .method-connector {
+        display: none;
+      }
+
+      .why-grid,
+      .social-grid,
+      .isyou-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .sticky-col {
+        position: static;
+      }
+
+      .timeline-card {
+        margin-top: 0.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero {
+        padding-top: calc(var(--nav-height) + 28px);
+        padding-bottom: 68px;
+      }
+
+      .hero h1 {
+        font-size: 2.05rem;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+      }
+
+      .grid-3 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .method-steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .method-connector {
+        display: none;
+      }
+
+      .nav-cta,
+      .btn {
+        width: 100%;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+      }
+
+      .stats-bar {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hero-inner {
+        gap: 32px;
+      }
+
+      .stats-bar {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .nav {
+        background: rgba(15, 23, 42, 0.96);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- NAV -->
+    <header class="nav">
+      <div class="container nav-inner">
+        <a href="#top" class="logo">Clarity·<span>Protocol</span></a>
+        <a href="#cta-final" class="nav-cta">Book a free call</a>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="aurora-orb aurora-orb--1"></div>
+        <div class="aurora-orb aurora-orb--2"></div>
+        <div class="aurora-orb aurora-orb--3"></div>
+
+        <div class="container hero-inner">
+          <div class="hero-copy reveal">
+            <div class="eyebrow">Investing Psychology Coaching</div>
+            <h1>
+              Stop Overriding Your Plan.<br />
+              Build a Process You'll Actually Follow — in 8 Weeks.
+            </h1>
+            <p class="hero-sub">
+              1:1 coaching that replaces emotional reactions with a calm, rules-based decision system.
+            </p>
+            <p class="hero-note">
+              No stock tips. No signals. Your process, built to last.
+            </p>
+            <div class="hero-ctas">
+              <a href="#cta-final" class="btn btn-primary-light">Book a free 20-minute call</a>
+              <a href="#cta-final" class="btn btn-outline-light">See how the coaching works</a>
+            </div>
+            <div class="stats-bar">
+              <div class="stat">
+                <div class="stat-label">Typical programme length</div>
+                <div class="stat-value">8–12 wks</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Real-market experience</div>
+                <div class="stat-value">7 yrs</div>
+              </div>
+              <div class="stat">
+                <div class="stat-label">Session format</div>
+                <div class="stat-value">1:1</div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-aside reveal">
+            <div class="hero-panel">
+              <h3>The gap isn't knowledge. It's execution.</h3>
+              <p>
+                You already know how you want to trade or invest. Together, we make sure your actual behaviour matches the plan
+                you write — even when the market spikes, dips, or drifts sideways.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- BENEFITS -->
+      <section class="section section-benefits">
+        <div class="container stack-l reveal">
+          <div class="stack-s">
+            <h2>Turn emotional noise into a repeatable process</h2>
+            <p class="benefit-desc">
+              The coaching focuses on the invisible layer between your analysis and your clicks — the moment where panic, FOMO,
+              or doubt overrides the rules you set for yourself.
+            </p>
+          </div>
+          <div class="grid-3">
+            <article class="card card-hover">
+              <div class="card-icon">🧠</div>
+              <div class="card-heading">Emotional Control</div>
+              <p>
+                Recognize panic or FOMO before you act — and follow a protocol instead of a reaction.
+              </p>
+            </article>
+            <article class="card card-hover">
+              <div class="card-icon">📋</div>
+              <div class="card-heading">Decision Clarity</div>
+              <p>
+                A written framework so you always know what you're deciding, why, and what the exit looks like.
+              </p>
+            </article>
+            <article class="card card-hover">
+              <div class="card-icon">📈</div>
+              <div class="card-heading">Measurable Consistency</div>
+              <p>
+                A weekly ritual that tracks process adherence, not P&amp;L. Consistency is the output. Results follow.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- IS THIS YOU -->
+      <section class="section section-isyou">
+        <div class="container isyou-grid">
+          <div class="reveal">
+            <h2 class="isyou-title">
+              You Know What to Do. You Just Don't Do It.
+            </h2>
+            <ul class="isyou-list">
+              >Panic-sell the moment it dips — then watch it recover</li>
+              >Chase a trade after missing it, knowing it breaks your rules</li>
+              >Hold a loser too long because the loss feels worse than the loss</li>
+              >Read everything, analyse everything — still uncertain when it matters</li>
+              >Inconsistent results not from bad analysis, but from not following your plan</li>
+            </ul>
+          </div>
+          <aside class="sticky-col reveal">
+            <div class="quote-card">
+              <p class="quote-text">
+                "The investor's chief problem — and even his worst enemy — is likely to be himself."
+              </p>
+              <p class="quote-meta">Benjamin Graham</p>
+              <p class="muted" style="margin-top:0.8rem;">
+                This coaching teaches you to follow your own plan without self-sabotage.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- METHOD -->
+      <section class="section section-method">
+        <div class="container stack-l">
+          <div class="method-header reveal">
+            <span class="badge-pill">The Framework</span>
+            <div class="stack-s">
+              <div class="flex" style="gap:0.6rem;align-items:center;flex-wrap:wrap;">
+                <h2>The Clarity Protocol</h2>
+                <span class="badge-pill" style="background:rgba(79,70,229,0.07);border-color:rgba(79,70,229,0.3);color:var(--c-accent);">
+                  Proprietary Methodology
+                </span>
+              </div>
+              <p class="method-subline">
+                A four-stage behavioural system built from 7 years of live market experience — not theory.
+              </p>
+            </div>
+          </div>
+
+          <div class="method-steps-wrap reveal">
+            <div class="method-connector"></div>
+            <div class="method-steps">
+              <article class="method-step">
+                <div class="method-step-label">Step 1</div>
+                <div class="method-step-title">Diagnose Your Pattern</div>
+                <p>
+                  Name your specific triggers: panic entries, revenge trades, early exits.
+                </p>
+              </article>
+              <article class="method-step">
+                <div class="method-step-label">Step 2</div>
+                <div class="method-step-title">Build Your Ruleset</div>
+                <p>
+                  Design your written decision framework — entries, sizing, exits, pre-trade checklist.
+                </p>
+              </article>
+              <article class="method-step">
+                <div class="method-step-label">Step 3</div>
+                <div class="method-step-title">Train Under Pressure</div>
+                <p>
+                  Live trade debriefs and pressure scenarios to rehearse calm decisions before they count.
+                </p>
+              </article>
+              <article class="method-step">
+                <div class="method-step-label">Step 4</div>
+                <div class="method-step-title">Review &amp; Lock It In</div>
+                <p>
+                  A weekly ritual that makes consistency your default — not your goal.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DELIVERABLES -->
+      <section class="section section-deliverables">
+        <div class="container grid-2">
+          <div class="reveal">
+            <h2>Concrete Deliverables, Not Just Insights</h2>
+            <p>
+              Every programme is 1:1 and built around your situation. Here's what you leave with.
+            </p>
+            <ul class="deliverables-list">
+              >
+                <div class="check-icon">✓</div>
+                <span>Personalised written decision framework</span>
+              </li>
+              >
+                <div class="check-icon">✓</div>
+                <span>Pre-trade behavioural checklist</span>
+              </li>
+              >
+                <div class="check-icon">✓</div>
+                <span>Trade journal template built around process, not P&amp;L</span>
+              </li>
+              >
+                <div class="check-icon">✓</div>
+                <span>Weekly review ritual, independent, under 20 minutes</span>
+              </li>
+              >
+                <div class="check-icon">✓</div>
+                <span>Clear map of your 2–3 core emotional patterns</span>
+              </li>
+            </ul>
+          </div>
+          <aside class="sticky-col reveal">
+            <div class="timeline-card card-dark">
+              <h3>Your 8-Week Arc</h3>
+              <ul class="timeline-list">
+                >
+                  <span class="timeline-item-label">Weeks 1–2:</span>
+                  <span class="timeline-item-text"> Diagnostic — mapping patterns and triggers</span>
+                </li>
+                >
+                  <span class="timeline-item-label">Weeks 3–4:</span>
+                  <span class="timeline-item-text"> Framework build — your ruleset and toolkit</span>
+                </li>
+                >
+                  <span class="timeline-item-label">Weeks 5–7:</span>
+                  <span class="timeline-item-text"> Live implementation — debriefs and refinement</span>
+                </li>
+                >
+                  <span class="timeline-item-label">Week 8:</span>
+                  <span class="timeline-item-text"> Lock-in — you leave with a system, not a dependency</span>
+                </li>
+              </ul>
+              <div class="aurora-orb aurora-orb--2" style="opacity:0.55;filter:blur(32px);"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- WHY ME -->
+      <section class="section section-why">
+        <div class="container why-grid">
+          <div class="reveal">
+            <h2>Built From the Same Seat You're Sitting In</h2>
+            <p class="why-bio" style="margin-top:1rem;">
+              7 years investing and trading independently — I know what it feels like when your rational mind says hold and your instinct screams get out.
+              I've made the emotional mistakes, studied why they happen, and built a process to navigate without constant second-guessing.
+              B2B background means I work clearly, respect your time, and focus on what's practical.
+            </p>
+          </div>
+          <div class="why-cards reveal">
+            <div class="why-card">
+              <div class="why-card-title">No advice, no conflicts</div>
+              <p>
+                Pure behavioural coaching. No signals, no agenda, no managed funds.
+              </p>
+            </div>
+            <div class="why-card">
+              <div class="why-card-title">Practical, not academic</div>
+              <p>
+                Every framework comes from real trades. I'll debrief your actual positions.
+              </p>
+            </div>
+            <div class="why-card">
+              <div class="why-card-title">Built for your psychology</div>
+              <p>
+                Your patterns are specific. Your ruleset will be too.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOCIAL PROOF -->
+      <section class="section section-social">
+        <div class="container social-grid">
+          <div class="reveal">
+            <h2>What Clients Say</h2>
+            <div class="testimonial-cols" style="margin-top:1.2rem;">
+              <article class="testimonial-card">
+                <div class="testimonial-label">Client Story</div>
+                <p>[CLIENT QUOTE PLACEHOLDER]</p>
+              </article>
+              <article class="testimonial-card">
+                <div class="testimonial-label">Client Story</div>
+                <p>[CLIENT QUOTE PLACEHOLDER]</p>
+              </article>
+            </div>
+          </div>
+          <aside class="reveal">
+            <div class="ba-card">
+              <div class="ba-row">
+                <div>
+                  <span class="badge-pill badge-pill--red">Before</span>
+                </div>
+                <p class="muted">
+                  [CLIENT QUOTE PLACEHOLDER]
+                </p>
+                <div>
+                  <span class="badge-pill badge-pill--green">After</span>
+                </div>
+                <p class="muted">
+                  [CLIENT QUOTE PLACEHOLDER]
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- FINAL CTA -->
+      <section id="cta-final" class="section-final-cta">
+        <div class="final-orb-1"></div>
+        <div class="final-orb-2"></div>
+        <div class="final-orb-3"></div>
+
+        <div class="container flex-center">
+          <div class="stack-m reveal" style="align-items:center;text-align:center;">
+            <h2 class="final-heading">
+              Your Process Won't Build Itself.<br />
+              But It Can Be Built in 8 Weeks.
+            </h2>
+            <p class="final-sub">
+              Book a free 20-minute call. No pitch, no pressure. Just a conversation.
+            </p>
+            <a href="#cta-final" class="btn btn-primary-light final-cta-btn">
+              Book a free 20-minute call
+            </a>
+            <p class="final-note">
+              No commitment. No financial advice.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">Clarity·<span>Protocol</span></div>
+          <div>Behavioural coaching only. Not financial advice. No funds managed. No securities recommended.</div>
+        </div>
+        <nav class="footer-links">
+          <a href="#top">Privacy</a>
+          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="mailto:hello@example.com">Contact</a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Scroll reveal
+    (function () {
+      const reveals = document.querySelectorAll(".reveal");
+      if (!("IntersectionObserver" in window) || reveals.length === 0) {
+        reveals.forEach((el) => el.classList.add("visible"));
+        return;
+      }
+
+      reveals.forEach((el, index) => {
+        el.style.transitionDelay = (index * 80) + "ms";
+      });
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.15,
+        }
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
