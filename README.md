@@ -13,8 +13,9 @@ A clean, professional landing page for investment coaching services built with T
 ```
 1-1/
 ├── index.html              # Main landing page (Financial Architect)
-├── clarity_protocol.html   # Alternative coaching page
-└── README.md              # This file
+├── clarity_protocol.html   # Alternative coaching page (Clarity Protocol)
+├── thank-you.html          # Post-form submission confirmation page
+└── README.md               # This file
 ```
 
 ---
@@ -32,42 +33,41 @@ The `index.html` file is structured with **clear comment blocks** that mark all 
 
 ### Editable Sections
 
-#### 1. **Page Title & Meta** (Lines 11-13)
+#### 1. **Page Title & Meta** (Lines ~1-20)
 ```html
-<title>The Financial Architect | Build Your Profitable Investing System</title>
+<title>The Financial Architect | Behavioral Investing Mentor</title>
+<meta name="description" content="Behavioral investing mentor helping traders build rules-based systems for the U.S. market. Book a free strategy call."/>
 ```
 
-#### 2. **Header / Brand Name** (Lines 75-78)
+#### 2. **Header / Brand Name**
 ```html
 <span class="text-lg font-extrabold tracking-tight font-headline">The Financial Architect</span>
 ```
 
-#### 3. **Hero Section** (Lines 87-114)
+#### 3. **Hero Section**
 - Badge text: `Institutional-Grade Mentorship`
-- Main headline: `Build a Profitable System in the U.S. Market`
-- Subheadline: `Structured coaching for serious investors...`
+- Main headline: `Build a Rules-Based System for the U.S. Market`
+- Subheadline: `Behavioral Investing Mentor. I help traders build repeatable systems...`
 - CTA button text: `Book Free Strategy Call`
 - Tagline: `Stop guessing. Start executing.`
 
-#### 4. **Pillars / Features** (Lines 120-152)
+#### 4. **Pillars / Features**
 - Section title: `The Architecture of Success`
 - Three pillar cards with icons, titles, and descriptions
 - Icons use [Material Symbols](https://fonts.google.com/icons)
 
-#### 5. **Testimonials** (Lines 159-183)
-- Two testimonial cards
-- Percentage badges: `+32%`, `4.5%`
-- Quotes and author names
+#### 5. **Testimonials**
+- Two testimonial cards with quotes
 
-#### 6. **Contact Form** (Lines 190-215)
+#### 6. **Contact Form**
 - Form headline: `Start Your Build`
-- Stats: `500+ investors • 15+ years • No obligation`
+- Stats: `500+ investors • 7+ years experience • No obligation`
 - Button text: `Book a Free Consultation`
 - Urgency note: `Limited monthly coaching slots available`
 
-#### 7. **Footer** (Lines 223-234)
-- Copyright year: `© 2024`
-- Footer links: Privacy, Terms, Contact
+#### 7. **Footer**
+- Copyright year: `© 2025`
+- Footer links: Contact, Clarity Protocol
 
 ---
 
@@ -120,23 +120,27 @@ git push origin main
 
 ## 📝 Form Integration
 
-The contact form currently has `action="#"` (no backend). To make it functional:
+The contact form uses **Formspree** (`https://formspree.io/f/xaqlyzlz`) and redirects to `thank-you.html` on successful submission.
 
-### Option A: Formspree (Free, Easy)
 ```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5">
-  <input type="text" name="name" placeholder="Full Name" required />
-  <input type="email" name="email" placeholder="Email Address" required />
+<form action="https://formspree.io/f/xaqlyzlz" method="POST" class="space-y-5">
+  <input type="hidden" name="_replyto" value="1on1coach500@gmail.com">
+  <input type="hidden" name="_subject" value="New Lead from Financial Architect">
+  <input type="hidden" name="_next" value="https://852-glitch.github.io/1-1/thank-you.html">
+  <input type="text" name="name" placeholder="Full Name" autocomplete="name" required />
+  <input type="email" name="email" placeholder="Email Address" autocomplete="email" required />
   <button type="submit">Book a Free Consultation</button>
 </form>
 ```
 
-### Option B: Google Forms
+### Alternative Integrations
+
+#### Google Forms
 1. Create a Google Form
 2. Get the pre-filled link
 3. Replace form `action` with the Google Form URL
 
-### Option C: Netlify Forms (If hosting on Netlify)
+#### Netlify Forms (If hosting on Netlify)
 ```html
 <form name="contact" method="POST" data-netlify="true" class="space-y-5">
   <!-- fields -->
