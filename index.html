@@ -144,7 +144,11 @@
         <p class="text-slate-600">Request a free audit of your current strategy.</p>
       </div>
       <!-- Note: Update action to your backend or thank-you.html for testing -->
-      <form action="thank-you.html" class="space-y-5">
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5">
+                      <!-- Hidden Fields for Formspree -->
+                      <input type="hidden" name="_replyto" value="1on1Coach@gmail.com">
+                      <input type="hidden" name="_subject" value="New Lead from Financial Architect">
+                      <input type="hidden" name="_next" value="https://852-glitch.github.io/1-1/thank-you.html">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <input 
             class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all" 
