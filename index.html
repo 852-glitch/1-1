@@ -43,7 +43,6 @@
       },
     }
   </script>
-
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -71,91 +70,93 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Field error messages */
+    .field-error {
+      display: none;
+      font-size: 0.75rem;
+      color: #10b981;
+      margin-top: 0.25rem;
+      padding-left: 0.25rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .field-error.visible {
+      display: block;
+    }
+    input.invalid, select.invalid {
+      border-color: #10b981 !important;
+      box-shadow: 0 0 0 2px rgba(16,185,129,0.25);
+    }
   </style>
 </head>
+<body class="font-body bg-surface text-primary">
 
-<body class="min-h-screen bg-gradient-to-br from-emerald-100 via-blue-100 to-purple-100 font-body text-slate-900 antialiased">
+  <!-- Nav -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-card">
+    <nav class="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-2 font-headline font-bold text-lg">
+        <span class="material-symbols-outlined text-secondary">account_balance</span>
+        The Financial Architect
+      </div>
+      <a href="#contact" class="bg-secondary text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-emerald-600 transition-all">Get Started</a>
+    </nav>
+  </header>
 
-<header class="w-full sticky top-0 z-50 bg-white/30 backdrop-blur-md border-b border-white/20">
-  <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-emerald-600">account_balance</span>
-      <span class="text-lg font-extrabold tracking-tight font-headline">The Financial Architect</span>
-    </div>
-    <a class="bg-primary text-white px-5 py-2 rounded-full font-semibold text-sm hover:opacity-90 transition-all" href="#contact">
-      Get Started
-    </a>
-  </div>
-</header>
-
-<main class="max-w-5xl mx-auto px-6 space-y-24 py-16">
-
-  <!-- Hero Section: fires animate-fade-in-up on load -->
-  <section class="text-center space-y-8 animate-fade-in-up">
-    <div class="glass-card p-10 md:p-16 rounded-2xl shadow-xl">
-      <span class="inline-block px-4 py-1 bg-emerald-500/10 text-emerald-700 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
+  <!-- Hero -->
+  <section class="min-h-screen flex items-center justify-center px-6 pt-24 pb-16 bg-gradient-to-br from-primary via-slate-800 to-slate-900">
+    <div class="max-w-2xl mx-auto text-center animate-fade-in-up">
+      <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
         Institutional-Grade Mentorship
       </span>
-      <h1 class="font-headline text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight mb-6">
-        Build a <span class="text-emerald-600">Rules-Based System</span> <br class="hidden md:block"/> for the U.S. Market
+      <h1 class="font-headline text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+        Build a <span class="text-secondary">Rules-Based System</span> <br/>for the U.S. Market
       </h1>
-      <p class="text-slate-600 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+      <p class="text-slate-300 text-lg mb-10 max-w-xl mx-auto">
         Behavioral Investing Mentor. I help traders build repeatable systems and overcome emotional trading. No hype, just discipline.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a class="bg-gradient-to-r from-emerald-500 to-teal-400 text-white px-10 py-4 rounded-xl font-bold text-lg shadow-lg shadow-emerald-500/20 hover:scale-[1.02] transition-all" href="#contact">
-          Book Free Strategy Call
-        </a>
-      </div>
-      <p class="mt-8 text-sm font-medium text-slate-500 italic">Stop guessing. Start executing.</p>
+      <a href="#contact" class="inline-block bg-secondary text-white font-bold text-lg px-10 py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-xl">Book Free Strategy Call</a>
+      <p class="text-slate-500 text-sm mt-6">Stop guessing. Start executing.</p>
     </div>
   </section>
 
-  <!-- Pillars Section: scroll-revealed -->
-  <section class="space-y-12 scroll-section" id="pillars">
-    <div class="text-center">
-      <h2 class="font-headline text-3xl font-extrabold text-slate-900 mb-2">The Architecture of Success</h2>
-      <p class="text-slate-600">Build a repeatable investing system with our core framework.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="glass-card p-8 rounded-2xl shadow-lg border border-white/40 hover:translate-y-[-4px] transition-transform">
-        <span class="material-symbols-outlined text-4xl text-emerald-600 mb-4">psychology</span>
-        <h3 class="text-xl font-headline font-bold mb-3">Behavioral Control</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">Recognize and neutralize emotional triggers. Master the mindset required for long-term survival.</p>
+  <!-- Value Props -->
+  <section class="py-20 px-6 scroll-section">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="font-headline text-3xl font-extrabold mb-3">The Architecture of Success</h2>
+        <p class="text-slate-500">Build a repeatable investing system with our core framework.</p>
       </div>
-      <div class="glass-card p-8 rounded-2xl shadow-lg border border-white/40 hover:translate-y-[-4px] transition-transform">
-        <span class="material-symbols-outlined text-4xl text-emerald-600 mb-4">architecture</span>
-        <h3 class="text-xl font-headline font-bold mb-3">System Design</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">Create a written, rules-based framework. No more discretionary guesswork or "gut feel" trades.</p>
-      </div>
-      <div class="glass-card p-8 rounded-2xl shadow-lg border border-white/40 hover:translate-y-[-4px] transition-transform">
-        <span class="material-symbols-outlined text-4xl text-emerald-600 mb-4">analytics</span>
-        <h3 class="text-xl font-headline font-bold mb-3">Execution Rituals</h3>
-        <p class="text-slate-600 text-sm leading-relaxed">Standardize your pre-trade and post-trade habits. Consistency in action leads to consistency in results.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-6 rounded-2xl shadow-lg">
+          <span class="material-symbols-outlined text-secondary text-3xl mb-3 block">psychology</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Behavioral Control</h3>
+          <p class="text-slate-500 text-sm">Recognize and neutralize emotional triggers. Master the mindset required for long-term survival.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl shadow-lg">
+          <span class="material-symbols-outlined text-secondary text-3xl mb-3 block">architecture</span>
+          <h3 class="font-headline font-bold text-lg mb-2">System Design</h3>
+          <p class="text-slate-500 text-sm">Create a written, rules-based framework. No more discretionary guesswork or &ldquo;gut feel&rdquo; trades.</p>
+        </div>
+        <div class="glass-card p-6 rounded-2xl shadow-lg">
+          <span class="material-symbols-outlined text-secondary text-3xl mb-3 block">analytics</span>
+          <h3 class="font-headline font-bold text-lg mb-2">Execution Rituals</h3>
+          <p class="text-slate-500 text-sm">Standardize your pre-trade and post-trade habits. Consistency in action leads to consistency in results.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials: scroll-revealed -->
-  <section class="scroll-section">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div class="glass-card p-8 rounded-2xl border border-white/40 flex items-center gap-6">
-        <div class="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-          <span class="material-symbols-outlined">verified</span>
-        </div>
-        <div>
-          <p class="text-slate-800 font-medium leading-snug">"Finally have a clear entry/exit system I can stick to. My decision-making is calmer and more systematic."</p>
-          <p class="text-xs text-slate-500 mt-2 font-bold uppercase tracking-wider">— Strategy Focus</p>
-        </div>
+  <!-- Social Proof -->
+  <section class="py-12 px-6 bg-gradient-to-r from-slate-50 to-emerald-50 scroll-section">
+    <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-card p-6 rounded-2xl shadow">
+        <span class="material-symbols-outlined text-secondary mb-2 block">verified</span>
+        <p class="text-slate-700 text-sm italic mb-3">&ldquo;Finally have a clear entry/exit system I can stick to. My decision-making is calmer and more systematic.&rdquo;</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">&mdash; Strategy Focus</p>
       </div>
-      <div class="glass-card p-8 rounded-2xl border border-white/40 flex items-center gap-6">
-        <div class="h-14 w-14 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
-          <span class="material-symbols-outlined">rule</span>
-        </div>
-        <div>
-          <p class="text-slate-800 font-medium leading-snug">"First time I've stuck to a plan for 3+ months without self-sabotage. The focus on psychology is the missing piece."</p>
-          <p class="text-xs text-slate-500 mt-2 font-bold uppercase tracking-wider">— Process Adherence</p>
-        </div>
+      <div class="glass-card p-6 rounded-2xl shadow">
+        <span class="material-symbols-outlined text-secondary mb-2 block">rule</span>
+        <p class="text-slate-700 text-sm italic mb-3">&ldquo;First time I&rsquo;ve stuck to a plan for 3+ months without self-sabotage. The focus on psychology is the missing piece.&rdquo;</p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">&mdash; Process Adherence</p>
       </div>
     </div>
   </section>
@@ -167,11 +168,12 @@
         <h2 class="font-headline text-3xl font-extrabold text-slate-900 mb-4">Start Your Build</h2>
         <p class="text-slate-600">Request a free audit of your current strategy.</p>
       </div>
-      <form action="https://formspree.io/f/xaqlyzlz" method="POST" class="space-y-5">
-        <!-- Honeypot: bots fill this, humans don't -->           <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-        
-        
-        
+
+      <form id="contact-form" action="https://formspree.io/f/xaqlyzlz" method="POST" class="space-y-5" novalidate>
+        <!-- Honeypot: bots fill this, humans don't -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <!-- #7 & #8: id, label, autocomplete -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <!-- #7 & #8: id, label, autocomplete -->
           <div>
@@ -184,7 +186,9 @@
               type="text"
               name="name"
               autocomplete="name"
+              aria-describedby="name-error"
             />
+            <span id="name-error" class="field-error" role="alert">Please enter your full name.</span>
           </div>
           <div>
             <label for="email" class="sr-only">Email Address</label>
@@ -196,10 +200,13 @@
               type="email"
               name="email"
               autocomplete="email"
+              aria-describedby="email-error"
             />
+            <span id="email-error" class="field-error" role="alert">Please enter a valid email address.</span>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label for="phone" class="sr-only">Phone Number</label>
             <input
@@ -210,7 +217,9 @@
               type="tel"
               name="phone"
               autocomplete="tel"
+              aria-describedby="phone-error"
             />
+            <span id="phone-error" class="field-error" role="alert">Please enter a valid phone number.</span>
           </div>
           <div>
             <label for="age" class="sr-only">Age</label>
@@ -221,78 +230,176 @@
               required
               type="number"
               name="age"
+              min="1"
+              max="120"
               autocomplete="off"
+              aria-describedby="age-error"
             />
-          </div>
-          <div>
-            <label for="years_investing" class="sr-only">Years Investing</label>
-            <input
-              id="years_investing"
-              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
-              placeholder="Years Investing"
-              required
-              type="number"
-              name="years_investing"
-              autocomplete="off"
-            />
+            <span id="age-error" class="field-error" role="alert">Please enter a valid age between 1 and 120.</span>
           </div>
         </div>
+
+        <div>
+          <label for="years_investing" class="sr-only">Years Investing</label>
+          <input
+            id="years_investing"
+            class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
+            placeholder="Years Investing (0 = just starting)"
+            required
+            type="number"
+            name="years_investing"
+            min="0"
+            max="120"
+            autocomplete="off"
+            aria-describedby="years-error"
+          />
+          <span id="years-error" class="field-error" role="alert">Please enter years investing between 0 and 120.</span>
+        </div>
+
         <div class="pt-4 text-center">
-          <p class="text-xs font-bold text-slate-500 mb-4 tracking-wide uppercase">500+ investors • 7+ years experience • No obligation</p>
+          <p class="text-xs font-bold text-slate-500 mb-4 tracking-wide uppercase">500+ investors &bull; 7+ years experience &bull; No obligation</p>
           <button
-            class="w-full bg-primary text-white font-bold text-lg py-5 rounded-xl hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10"
+            id="submit-btn"
+            class="w-full bg-primary text-white font-bold text-lg py-5 rounded-xl hover:bg-slate-800 transition-all shadow-xl"
             type="submit"
           >
             Book a Free Consultation
           </button>
-          <p class="mt-4 text-[10px] text-slate-400 uppercase tracking-widest font-bold">Limited monthly coaching slots available</p>
+          <p class="text-xs text-slate-400 mt-3">Limited monthly coaching slots available</p>
         </div>
       </form>
     </div>
   </section>
 
-</main>
-
-<footer class="w-full py-12 bg-white/30 backdrop-blur-sm border-t border-white/20">
-  <div class="max-w-5xl mx-auto px-6 space-y-8">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-      <!-- #4 Copyright year updated to 2025 -->
-      <p class="text-sm text-slate-500 font-medium">&copy; 2025 The Financial Architect. Behavioral Investing Mentorship.</p>
-      <div class="flex gap-8 text-xs font-bold uppercase tracking-widest text-slate-400">
-        <!-- #5 Privacy and Terms: links removed to avoid dead hrefs -->
-        <a class="hover:text-emerald-600 transition-colors" href="#contact">Contact</a>
-        <!-- #9 Link to clarity_protocol.html -->
-        <a class="hover:text-emerald-600 transition-colors" href="clarity_protocol.html">Clarity Protocol</a>
-      </div>
+  <!-- Footer -->
+  <footer class="py-10 px-6 text-center border-t border-slate-100 scroll-section">
+    <p class="text-sm text-slate-500 mb-2">&copy; 2025 The Financial Architect. Behavioral Investing Mentorship.</p>
+    <div class="flex justify-center gap-6 text-sm font-medium text-slate-600 mb-4">
+      <a href="#contact" class="hover:text-secondary transition-colors">Contact</a>
+      <a href="clarity_protocol.html" class="hover:text-secondary transition-colors">Clarity Protocol</a>
     </div>
-    <div class="max-w-3xl mx-auto text-center">
-      <p class="text-[10px] text-slate-400 leading-relaxed uppercase tracking-widest font-bold">
-        Educational coaching only. Not financial, investment, or tax advice. <br/>
-        Past results do not guarantee future outcomes. No stock picking or securities recommendations.
-      </p>
-    </div>
-  </div>
-</footer>
+    <p class="text-xs text-slate-400 max-w-md mx-auto">
+      Educational coaching only. Not financial, investment, or tax advice.<br/>
+      Past results do not guarantee future outcomes. No stock picking or securities recommendations.
+    </p>
+  </footer>
 
-<!-- #6 IntersectionObserver for scroll-section elements -->
-<script>
-  (function () {
-    var sections = document.querySelectorAll('.scroll-section');
-    if (!('IntersectionObserver' in window) || sections.length === 0) {
-      sections.forEach(function (s) { s.classList.add('visible'); });
-      return;
-    }
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
+  <!-- Form validation + fetch submit + redirect -->
+  <script>
+    (function () {
+      var form = document.getElementById('contact-form');
+      var btn  = document.getElementById('submit-btn');
+      if (!form || !btn) return;
+
+      var rules = [
+        {
+          id: 'name',
+          errId: 'name-error',
+          validate: function (v) { return v.trim().length >= 2; }
+        },
+        {
+          id: 'email',
+          errId: 'email-error',
+          validate: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+        },
+        {
+          id: 'phone',
+          errId: 'phone-error',
+          validate: function (v) { return /^[+\d][\d\s\-().]{6,}$/.test(v.trim()); }
+        },
+        {
+          id: 'age',
+          errId: 'age-error',
+          validate: function (v) { var n = Number(v); return Number.isInteger(n) && n >= 1 && n <= 120; }
+        },
+        {
+          id: 'years_investing',
+          errId: 'years-error',
+          validate: function (v) { var n = Number(v); return Number.isInteger(n) && n >= 0 && n <= 120; }
         }
+      ];
+
+      function validateAll() {
+        var ok = true;
+        rules.forEach(function (rule) {
+          var field = document.getElementById(rule.id);
+          var errEl = document.getElementById(rule.errId);
+          if (!field || !errEl) return;
+          var valid = rule.validate(field.value);
+          field.classList.toggle('invalid', !valid);
+          errEl.classList.toggle('visible', !valid);
+          if (!valid) ok = false;
+        });
+        return ok;
+      }
+
+      /* Live re-validation on blur */
+      rules.forEach(function (rule) {
+        var field = document.getElementById(rule.id);
+        if (!field) return;
+        field.addEventListener('blur', function () {
+          var errEl = document.getElementById(rule.errId);
+          var valid = rule.validate(field.value);
+          field.classList.toggle('invalid', !valid);
+          if (errEl) errEl.classList.toggle('visible', !valid);
+        });
+        field.addEventListener('input', function () {
+          if (field.classList.contains('invalid')) {
+            var errEl = document.getElementById(rule.errId);
+            var valid = rule.validate(field.value);
+            field.classList.toggle('invalid', !valid);
+            if (errEl) errEl.classList.toggle('visible', !valid);
+          }
+        });
       });
-    }, { threshold: 0.12 });
-    sections.forEach(function (s) { observer.observe(s); });
-  })();
-</script>
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!validateAll()) return;
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        })
+        .then(function (res) {
+          if (res.ok) {
+            window.location.href = '/1-1/thank-you.html';
+          } else {
+            return res.json().then(function (data) {
+              throw new Error(data.error || 'Submission failed');
+            });
+          }
+        })
+        .catch(function (err) {
+          btn.disabled = false;
+          btn.textContent = 'Book a Free Consultation';
+          alert('Something went wrong: ' + err.message + '. Please try again.');
+        });
+      });
+    })();
+  </script>
+
+  <!-- Scroll reveal -->
+  <script>
+    (function () {
+      var sections = document.querySelectorAll('.scroll-section');
+      if (!('IntersectionObserver' in window) || sections.length === 0) {
+        sections.forEach(function (s) { s.classList.add('visible'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      sections.forEach(function (s) { observer.observe(s); });
+    })();
+  </script>
 
 </body>
 </html>
