@@ -1,6 +1,6 @@
 # The Financial Architect - Landing Page
 
-A clean, professional landing page for investment coaching services built with TailwindCSS and modern glassmorphism design.
+A clean, professional landing page for investment coaching services built with Tailwind CSS (CLI build) and modern glassmorphism design.
 
 ## 🌐 Live Site
 
@@ -15,8 +15,35 @@ A clean, professional landing page for investment coaching services built with T
 ├── index.html              # Main landing page (Financial Architect)
 ├── clarity_protocol.html   # Alternative coaching page (Clarity Protocol)
 ├── thank-you.html          # Post-form submission confirmation page
+├── favicon.svg             # SVG favicon (evil eye / 🧿)
+├── input.css               # Tailwind CSS source file
+├── tailwind.config.js      # Tailwind config (custom colors, fonts, plugins)
+├── package.json            # Build scripts (build + watch)
+├── dist/
+│   └── output.css          # Compiled & minified Tailwind CSS (do not edit)
 └── README.md               # This file
 ```
+
+---
+
+## 🛠️ Local Setup & Build
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/852-glitch/1-1.git
+cd 1-1
+
+# 2. Install dependencies
+npm install
+
+# 3. Build CSS (minified, production-ready)
+npm run build
+
+# 4. Or watch for changes during development
+npm run watch
+```
+
+> **Note:** After editing Tailwind classes in any `.html` file, run `npm run build` and commit `dist/output.css`.
 
 ---
 
@@ -25,10 +52,7 @@ A clean, professional landing page for investment coaching services built with T
 The `index.html` file is structured with **clear comment blocks** that mark all editable sections. Look for these markers:
 
 ```html
-<!-- ========================================
-     SECTION NAME
-     Edit: What you can change here
-     ======================================== -->
+<!-- ── Section Name ── -->
 ```
 
 ### Editable Sections
@@ -41,7 +65,9 @@ The `index.html` file is structured with **clear comment blocks** that mark all 
 
 #### 2. **Header / Brand Name**
 ```html
-<span class="text-lg font-extrabold tracking-tight font-headline">The Financial Architect</span>
+<div class="flex items-center gap-2 font-headline font-bold text-lg">
+  The Financial Architect
+</div>
 ```
 
 #### 3. **Hero Section**
@@ -66,7 +92,7 @@ The `index.html` file is structured with **clear comment blocks** that mark all 
 - Urgency note: `Limited monthly coaching slots available`
 
 #### 7. **Footer**
-- Copyright year: `© 2025`
+- Copyright year: `© 2026`
 - Footer links: Contact, Clarity Protocol
 
 ---
@@ -74,76 +100,80 @@ The `index.html` file is structured with **clear comment blocks** that mark all 
 ## 🎨 Design System
 
 ### Colors
-```css
---primary: #0f172a      /* Dark slate (CTA buttons, text) */
---secondary: #10b981    /* Emerald green (accents, highlights) */
---surface: #f8fafc      /* Light background */
+```js
+// tailwind.config.js
+colors: {
+  'primary':   '#0f172a',  // Dark slate (nav, CTA buttons, body text)
+  'secondary': '#10b981',  // Emerald green (accents, highlights, icons)
+  'surface':   '#f8fafc',  // Light off-white background
+}
 ```
 
 ### Fonts
-- **Headlines:** Manrope (bold, modern)
-- **Body:** Inter (clean, readable)
+- **Headlines:** Manrope (bold, modern) — loaded via Google Fonts
+- **Body:** Inter (clean, readable) — loaded via Google Fonts
 - **Icons:** Material Symbols Outlined
 
 ### Key Components
-- **Glass cards:** Semi-transparent white panels with blur effect
-- **Gradient background:** Soft emerald-blue-purple blend
-- **Hover effects:** Lift animation on cards and buttons
+- **Glass cards:** Semi-transparent white panels with `backdrop-filter: blur(24px)`
+- **Hero background:** Dark gradient `from-primary via-slate-800 to-slate-900`
+- **Animations:** `fadeInUp` on hero load; `IntersectionObserver` scroll-reveal on all other sections
 
 ---
 
 ## 🚀 Making Changes
 
-### Option 1: Edit Directly on GitHub
-1. Go to [index.html](https://github.com/852-glitch/1-1/blob/main/index.html)
-2. Click the ✏️ **Edit** button (top right)
-3. Make your changes (follow comment markers)
-4. Scroll down → **Commit changes**
-5. Wait ~2 minutes → changes are live at [https://852-glitch.github.io/1-1/](https://852-glitch.github.io/1-1/)
-
-### Option 2: Edit Locally
+### Option 1: Edit Locally in VS Code
 ```bash
-# Clone the repository
-git clone https://github.com/852-glitch/1-1.git
-cd 1-1
+# Start the CSS watcher (auto-rebuilds on save)
+npm run watch
 
-# Edit index.html in your favorite editor
-# Open index.html in a browser to preview
+# Edit index.html, clarity_protocol.html, etc.
+# Preview by opening index.html in a browser (Live Server extension recommended)
 
-# Commit and push changes
-git add index.html
-git commit -m "Update content"
+# When done — build final minified CSS
+npm run build
+
+# Commit everything
+git add dist/output.css index.html
+git commit -m "your message"
 git push origin main
 ```
+
+### Option 2: Edit Directly on GitHub
+1. Go to [index.html](https://github.com/852-glitch/1-1/blob/main/index.html)
+2. Click the ✏️ **Edit** button (top right)
+3. Make your changes
+4. Scroll down → **Commit changes**
+5. Wait ~2 minutes → changes are live
+
+> ⚠️ If you add new Tailwind classes via the GitHub editor, you'll need to run `npm run build` locally and push `dist/output.css` — GitHub Pages does not run build steps.
 
 ---
 
 ## 📝 Form Integration
 
-The contact form uses **Formspree** (`https://formspree.io/f/xaqlyzlz`) and redirects to `thank-you.html` on successful submission.
+The contact form uses **Formspree** (`https://formspree.io/f/xaqlyzlz`).
+
+On success it redirects to `thank-you.html` via a client-side `fetch` + `window.location.href`. On failure (network error or 4xx/5xx), an inline error banner is shown — no `alert()`.
+
+**Current form fields:**
+- Full Name
+- Email Address
+- Phone Number
+- Age
+- Years Investing
+
+**Spam protection:** Honeypot field (`name="_gotcha"`) — bots fill it, Formspree discards the submission.
 
 ```html
-<form action="https://formspree.io/f/xaqlyzlz" method="POST" class="space-y-5">
-  <input type="hidden" name="_replyto" value="1on1coach500@gmail.com">
-  <input type="hidden" name="_subject" value="New Lead from Financial Architect">
-  <input type="hidden" name="_next" value="https://852-glitch.github.io/1-1/thank-you.html">
-  <input type="text" name="name" placeholder="Full Name" autocomplete="name" required />
-  <input type="email" name="email" placeholder="Email Address" autocomplete="email" required />
+<form id="contact-form"
+      action="https://formspree.io/f/xaqlyzlz"
+      method="POST"
+      novalidate>
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+  <!-- fields: name, email, phone, age, years_investing -->
   <button type="submit">Book a Free Consultation</button>
-</form>
-```
-
-### Alternative Integrations
-
-#### Google Forms
-1. Create a Google Form
-2. Get the pre-filled link
-3. Replace form `action` with the Google Form URL
-
-#### Netlify Forms (If hosting on Netlify)
-```html
-<form name="contact" method="POST" data-netlify="true" class="space-y-5">
-  <!-- fields -->
 </form>
 ```
 
@@ -152,9 +182,11 @@ The contact form uses **Formspree** (`https://formspree.io/f/xaqlyzlz`) and redi
 ## 🔧 Tech Stack
 
 - **HTML5** — Semantic structure
-- **TailwindCSS** (CDN) — Utility-first styling
+- **Tailwind CSS v3** (CLI build) — Utility-first styling, compiled to `dist/output.css`
+- **@tailwindcss/forms** — Form element base styles
 - **Google Fonts** — Manrope + Inter
 - **Material Symbols** — Icon library
+- **Formspree** — Form backend
 - **GitHub Pages** — Free hosting
 
 ---
@@ -168,11 +200,12 @@ This is a personal project. Feel free to customize for your own use.
 ## 🤝 Need Help?
 
 If you need to:
-- Change colors → Edit the `colors` object in `<script id="tailwind-config">`
-- Add new sections → Follow the existing comment structure
-- Change icons → Browse [Material Symbols](https://fonts.google.com/icons) and update icon names
+- **Change colors** → Edit the `colors` object in `tailwind.config.js`, then run `npm run build`
+- **Add new sections** → Follow the `<!-- ── Section Name ── -->` comment structure in `index.html`
+- **Change icons** → Browse [Material Symbols](https://fonts.google.com/icons) and update the icon name text inside `<span class="material-symbols-outlined">`
+- **Change fonts** → Update the Google Fonts `<link>` tags in `<head>` and the `fontFamily` object in `tailwind.config.js`
 
-**Pro tip:** Use your browser's **Inspect Element** (F12) to experiment with styles before editing the file.
+**Pro tip:** Run `npm run watch` in a VS Code terminal while editing — CSS rebuilds instantly on every save.
 
 ---
 
