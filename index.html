@@ -19,36 +19,14 @@
 
   <title>The Financial Architect | Behavioral Investing Mentor</title>
 
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <!--
+    Tailwind CSS — compiled with CLI (no runtime compiler in the browser).
+    To rebuild after changing classes:
+      npx tailwindcss -i ./input.css -o ./dist/output.css --minify
+  -->
+  <link rel="stylesheet" href="dist/output.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#0f172a",
-            "secondary": "#10b981",
-            "on-secondary": "#ffffff",
-            "surface": "#f8fafc",
-          },
-          fontFamily: {
-            "headline": ["Manrope", "sans-serif"],
-            "body": ["Inter", "sans-serif"],
-          },
-          borderRadius: {
-            "DEFAULT": "0.5rem",
-            "lg": "0.75rem",
-            "xl": "1rem",
-            "2xl": "1.5rem",
-            "full": "9999px"
-          },
-        },
-      },
-    }
-  </script>
 
   <style>
     .material-symbols-outlined {
@@ -348,7 +326,7 @@
   <!-- ── Footer ── -->
   <footer class="py-10 px-6 text-center border-t border-slate-100 scroll-section">
     <p class="text-sm text-slate-500 mb-2">
-      &copy; 2025 The Financial Architect. Behavioral Investing Mentorship.
+      &copy; 2026 The Financial Architect. Behavioral Investing Mentorship.
     </p>
     <div class="flex justify-center gap-6 text-sm font-medium text-slate-600 mb-4">
       <a href="#contact" class="hover:text-secondary transition-colors">Contact</a>
@@ -455,7 +433,7 @@
 
         /* Disable button + show loading state */
         btn.disabled    = true;
-        btn.textContent = 'Sending…';
+        btn.textContent = 'Sending\u2026';
 
         fetch(form.action, {
           method:  'POST',
