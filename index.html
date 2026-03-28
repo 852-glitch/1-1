@@ -15,7 +15,7 @@
 
   <!-- #3 Favicon -->
   <link rel="icon" href="favicon.ico"/>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 
   <title>The Financial Architect | Behavioral Investing Mentor</title>
 
@@ -38,11 +38,18 @@
             "headline": ["Manrope", "sans-serif"],
             "body": ["Inter", "sans-serif"],
           },
-          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px"},
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem",
+            "2xl": "1.5rem",
+            "full": "9999px"
+          },
         },
       },
     }
   </script>
+
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -52,10 +59,10 @@
       backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    /* #6 animate-fade-in-up: only hero fires on load; rest use IntersectionObserver below */
+    /* animate-fade-in-up: only hero fires on load; rest use IntersectionObserver below */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in-up {
       animation: fadeInUp 0.8s ease-out forwards;
@@ -70,7 +77,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-    /* Field error messages */
+    /* Field-level validation error messages */
     .field-error {
       display: none;
       font-size: 0.75rem;
@@ -82,43 +89,54 @@
     .field-error.visible {
       display: block;
     }
-    input.invalid, select.invalid {
+    input.invalid {
       border-color: #10b981 !important;
-      box-shadow: 0 0 0 2px rgba(16,185,129,0.25);
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
     }
   </style>
 </head>
+
 <body class="font-body bg-surface text-primary">
 
-  <!-- Nav -->
+  <!-- ── Nav ── -->
   <header class="fixed top-0 left-0 right-0 z-50 glass-card">
     <nav class="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
       <div class="flex items-center gap-2 font-headline font-bold text-lg">
         <span class="material-symbols-outlined text-secondary">account_balance</span>
         The Financial Architect
       </div>
-      <a href="#contact" class="bg-secondary text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-emerald-600 transition-all">Get Started</a>
+      <a href="#contact"
+         class="bg-secondary text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-emerald-600 transition-all">
+        Get Started
+      </a>
     </nav>
   </header>
 
-  <!-- Hero -->
-  <section class="min-h-screen flex items-center justify-center px-6 pt-24 pb-16 bg-gradient-to-br from-primary via-slate-800 to-slate-900">
+  <!-- ── Hero ── -->
+  <section class="min-h-screen flex items-center justify-center px-6 pt-24 pb-16
+                  bg-gradient-to-br from-primary via-slate-800 to-slate-900">
     <div class="max-w-2xl mx-auto text-center animate-fade-in-up">
-      <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
+      <span class="inline-block bg-secondary/20 text-secondary text-xs font-semibold
+                   tracking-widest uppercase px-4 py-1.5 rounded-full mb-6">
         Institutional-Grade Mentorship
       </span>
       <h1 class="font-headline text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
-        Build a <span class="text-secondary">Rules-Based System</span> <br/>for the U.S. Market
+        Build a <span class="text-secondary">Rules-Based System</span><br/>for the U.S. Market
       </h1>
       <p class="text-slate-300 text-lg mb-10 max-w-xl mx-auto">
-        Behavioral Investing Mentor. I help traders build repeatable systems and overcome emotional trading. No hype, just discipline.
+        Behavioral Investing Mentor. I help traders build repeatable systems and overcome
+        emotional trading. No hype, just discipline.
       </p>
-      <a href="#contact" class="inline-block bg-secondary text-white font-bold text-lg px-10 py-4 rounded-xl hover:bg-emerald-600 transition-all shadow-xl">Book Free Strategy Call</a>
+      <a href="#contact"
+         class="inline-block bg-secondary text-white font-bold text-lg px-10 py-4
+                rounded-xl hover:bg-emerald-600 transition-all shadow-xl">
+        Book Free Strategy Call
+      </a>
       <p class="text-slate-500 text-sm mt-6">Stop guessing. Start executing.</p>
     </div>
   </section>
 
-  <!-- Value Props -->
+  <!-- ── Value Props ── -->
   <section class="py-20 px-6 scroll-section">
     <div class="max-w-2xl mx-auto">
       <div class="text-center mb-12">
@@ -129,151 +147,209 @@
         <div class="glass-card p-6 rounded-2xl shadow-lg">
           <span class="material-symbols-outlined text-secondary text-3xl mb-3 block">psychology</span>
           <h3 class="font-headline font-bold text-lg mb-2">Behavioral Control</h3>
-          <p class="text-slate-500 text-sm">Recognize and neutralize emotional triggers. Master the mindset required for long-term survival.</p>
+          <p class="text-slate-500 text-sm">
+            Recognize and neutralize emotional triggers. Master the mindset required for
+            long-term survival.
+          </p>
         </div>
         <div class="glass-card p-6 rounded-2xl shadow-lg">
           <span class="material-symbols-outlined text-secondary text-3xl mb-3 block">architecture</span>
           <h3 class="font-headline font-bold text-lg mb-2">System Design</h3>
-          <p class="text-slate-500 text-sm">Create a written, rules-based framework. No more discretionary guesswork or &ldquo;gut feel&rdquo; trades.</p>
+          <p class="text-slate-500 text-sm">
+            Create a written, rules-based framework. No more discretionary guesswork or
+            &ldquo;gut feel&rdquo; trades.
+          </p>
         </div>
         <div class="glass-card p-6 rounded-2xl shadow-lg">
           <span class="material-symbols-outlined text-secondary text-3xl mb-3 block">analytics</span>
           <h3 class="font-headline font-bold text-lg mb-2">Execution Rituals</h3>
-          <p class="text-slate-500 text-sm">Standardize your pre-trade and post-trade habits. Consistency in action leads to consistency in results.</p>
+          <p class="text-slate-500 text-sm">
+            Standardize your pre-trade and post-trade habits. Consistency in action leads
+            to consistency in results.
+          </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Social Proof -->
+  <!-- ── Social Proof ── -->
   <section class="py-12 px-6 bg-gradient-to-r from-slate-50 to-emerald-50 scroll-section">
     <div class="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="glass-card p-6 rounded-2xl shadow">
         <span class="material-symbols-outlined text-secondary mb-2 block">verified</span>
-        <p class="text-slate-700 text-sm italic mb-3">&ldquo;Finally have a clear entry/exit system I can stick to. My decision-making is calmer and more systematic.&rdquo;</p>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">&mdash; Strategy Focus</p>
+        <p class="text-slate-700 text-sm italic mb-3">
+          &ldquo;Finally have a clear entry/exit system I can stick to. My decision-making
+          is calmer and more systematic.&rdquo;
+        </p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">
+          &mdash; Strategy Focus
+        </p>
       </div>
       <div class="glass-card p-6 rounded-2xl shadow">
         <span class="material-symbols-outlined text-secondary mb-2 block">rule</span>
-        <p class="text-slate-700 text-sm italic mb-3">&ldquo;First time I&rsquo;ve stuck to a plan for 3+ months without self-sabotage. The focus on psychology is the missing piece.&rdquo;</p>
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">&mdash; Process Adherence</p>
+        <p class="text-slate-700 text-sm italic mb-3">
+          &ldquo;First time I&rsquo;ve stuck to a plan for 3+ months without self-sabotage.
+          The focus on psychology is the missing piece.&rdquo;
+        </p>
+        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wide">
+          &mdash; Process Adherence
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section: scroll-revealed -->
-  <section class="max-w-2xl mx-auto scroll-section pb-12" id="contact">
+  <!-- ── Contact ── -->
+  <section class="max-w-2xl mx-auto px-6 py-16 scroll-section" id="contact">
     <div class="glass-card p-10 rounded-2xl shadow-2xl">
       <div class="text-center mb-10">
-        <h2 class="font-headline text-3xl font-extrabold text-slate-900 mb-4">Start Your Build</h2>
+        <h2 class="font-headline text-3xl font-extrabold text-slate-900 mb-4">
+          Start Your Build
+        </h2>
         <p class="text-slate-600">Request a free audit of your current strategy.</p>
       </div>
 
-      <form id="contact-form" action="https://formspree.io/f/xaqlyzlz" method="POST" class="space-y-5" novalidate>
+      <form id="contact-form"
+            action="https://formspree.io/f/xaqlyzlz"
+            method="POST"
+            class="space-y-5"
+            novalidate>
+
         <!-- Honeypot: bots fill this, humans don't -->
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
-        <!-- #7 & #8: id, label, autocomplete -->
+        <!-- Row 1: Name + Email -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <!-- #7 & #8: id, label, autocomplete -->
           <div>
             <label for="name" class="sr-only">Full Name</label>
             <input
               id="name"
-              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
-              placeholder="Full Name"
-              required
               type="text"
               name="name"
+              placeholder="Full Name"
+              required
               autocomplete="name"
               aria-describedby="name-error"
+              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500
+                     rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
             />
-            <span id="name-error" class="field-error" role="alert">Please enter your full name.</span>
+            <span id="name-error" class="field-error" role="alert">
+              Please enter your full name.
+            </span>
           </div>
           <div>
             <label for="email" class="sr-only">Email Address</label>
             <input
               id="email"
-              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
-              placeholder="Email Address"
-              required
               type="email"
               name="email"
+              placeholder="Email Address"
+              required
               autocomplete="email"
               aria-describedby="email-error"
+              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500
+                     rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
             />
-            <span id="email-error" class="field-error" role="alert">Please enter a valid email address.</span>
+            <span id="email-error" class="field-error" role="alert">
+              Please enter a valid email address.
+            </span>
           </div>
         </div>
 
+        <!-- Row 2: Phone + Age -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label for="phone" class="sr-only">Phone Number</label>
             <input
               id="phone"
-              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
-              placeholder="Phone Number"
-              required
               type="tel"
               name="phone"
+              placeholder="Phone Number"
+              required
               autocomplete="tel"
               aria-describedby="phone-error"
+              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500
+                     rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
             />
-            <span id="phone-error" class="field-error" role="alert">Please enter a valid phone number.</span>
+            <span id="phone-error" class="field-error" role="alert">
+              Please enter a valid phone number.
+            </span>
           </div>
           <div>
             <label for="age" class="sr-only">Age</label>
             <input
               id="age"
-              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
-              placeholder="Age"
-              required
               type="number"
               name="age"
+              placeholder="Age"
+              required
               min="1"
               max="120"
               autocomplete="off"
               aria-describedby="age-error"
+              class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500
+                     rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
             />
-            <span id="age-error" class="field-error" role="alert">Please enter a valid age between 1 and 120.</span>
+            <span id="age-error" class="field-error" role="alert">
+              Please enter a valid age between 1 and 120.
+            </span>
           </div>
         </div>
 
+        <!-- Row 3: Years Investing -->
         <div>
           <label for="years_investing" class="sr-only">Years Investing</label>
           <input
             id="years_investing"
-            class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500 rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
-            placeholder="Years Investing (0 = just starting)"
-            required
             type="number"
             name="years_investing"
+            placeholder="Years Investing (0 = just starting)"
+            required
             min="0"
             max="120"
             autocomplete="off"
             aria-describedby="years-error"
+            class="w-full bg-white/50 border-white/20 focus:ring-2 focus:ring-emerald-500
+                   rounded-xl py-4 px-5 text-slate-900 placeholder:text-slate-400 transition-all"
           />
-          <span id="years-error" class="field-error" role="alert">Please enter years investing between 0 and 120.</span>
+          <span id="years-error" class="field-error" role="alert">
+            Please enter years investing between 0 and 120.
+          </span>
         </div>
 
+        <!-- Submit -->
         <div class="pt-4 text-center">
-          <p class="text-xs font-bold text-slate-500 mb-4 tracking-wide uppercase">500+ investors &bull; 7+ years experience &bull; No obligation</p>
+          <p class="text-xs font-bold text-slate-500 mb-4 tracking-wide uppercase">
+            500+ investors &bull; 7+ years experience &bull; No obligation
+          </p>
           <button
             id="submit-btn"
-            class="w-full bg-primary text-white font-bold text-lg py-5 rounded-xl hover:bg-slate-800 transition-all shadow-xl"
             type="submit"
+            class="w-full bg-primary text-white font-bold text-lg py-5 rounded-xl
+                   hover:bg-slate-800 transition-all shadow-xl"
           >
             Book a Free Consultation
           </button>
-          <p class="text-xs text-slate-400 mt-3">Limited monthly coaching slots available</p>           <div id="form-error-banner" role="alert" style="display:none" class="mt-4 rounded-xl border border-emerald-400/40 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 font-medium text-left"></div>
+          <p class="text-xs text-slate-400 mt-3">Limited monthly coaching slots available</p>
+
+          <!-- Inline error banner (hidden until a submission error occurs) -->
+          <div
+            id="form-error-banner"
+            role="alert"
+            style="display:none"
+            class="mt-4 rounded-xl border border-emerald-400/40 bg-emerald-50
+                   px-4 py-3 text-sm text-emerald-800 font-medium text-left"
+          ></div>
         </div>
+
       </form>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ── Footer ── -->
   <footer class="py-10 px-6 text-center border-t border-slate-100 scroll-section">
-    <p class="text-sm text-slate-500 mb-2">&copy; 2025 The Financial Architect. Behavioral Investing Mentorship.</p>
+    <p class="text-sm text-slate-500 mb-2">
+      &copy; 2025 The Financial Architect. Behavioral Investing Mentorship.
+    </p>
     <div class="flex justify-center gap-6 text-sm font-medium text-slate-600 mb-4">
       <a href="#contact" class="hover:text-secondary transition-colors">Contact</a>
       <a href="clarity_protocol.html" class="hover:text-secondary transition-colors">Clarity Protocol</a>
@@ -284,13 +360,15 @@
     </p>
   </footer>
 
-  <!-- Form validation + fetch submit + redirect -->
+  <!-- ── Form: validation + fetch submit + client-side redirect ── -->
   <script>
     (function () {
-      var form = document.getElementById('contact-form');
-      var btn  = document.getElementById('submit-btn');
+      var form   = document.getElementById('contact-form');
+      var btn    = document.getElementById('submit-btn');
+      var banner = document.getElementById('form-error-banner');
       if (!form || !btn) return;
 
+      /* Validation rules */
       var rules = [
         {
           id: 'name',
@@ -300,25 +378,36 @@
         {
           id: 'email',
           errId: 'email-error',
-          validate: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+          validate: function (v) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+          }
         },
         {
           id: 'phone',
           errId: 'phone-error',
-          validate: function (v) { return /^[+\d][\d\s\-().]{6,}$/.test(v.trim()); }
+          validate: function (v) {
+            return /^[+\d][\d\s\-(). ]{6,}$/.test(v.trim());
+          }
         },
         {
           id: 'age',
           errId: 'age-error',
-          validate: function (v) { var n = Number(v); return Number.isInteger(n) && n >= 1 && n <= 120; }
+          validate: function (v) {
+            var n = Number(v);
+            return Number.isInteger(n) && n >= 1 && n <= 120;
+          }
         },
         {
           id: 'years_investing',
           errId: 'years-error',
-          validate: function (v) { var n = Number(v); return Number.isInteger(n) && n >= 0 && n <= 120; }
+          validate: function (v) {
+            var n = Number(v);
+            return Number.isInteger(n) && n >= 0 && n <= 120;
+          }
         }
       ];
 
+      /* Run all rules; mark fields + show/hide error spans */
       function validateAll() {
         var ok = true;
         rules.forEach(function (rule) {
@@ -333,55 +422,72 @@
         return ok;
       }
 
-      /* Live re-validation on blur */
+      /* Live feedback: validate on blur, clear error on input once corrected */
       rules.forEach(function (rule) {
         var field = document.getElementById(rule.id);
         if (!field) return;
+
         field.addEventListener('blur', function () {
           var errEl = document.getElementById(rule.errId);
-          var valid = rule.validate(field.value);
+          var valid  = rule.validate(field.value);
           field.classList.toggle('invalid', !valid);
           if (errEl) errEl.classList.toggle('visible', !valid);
         });
+
         field.addEventListener('input', function () {
-          if (field.classList.contains('invalid')) {
-            var errEl = document.getElementById(rule.errId);
-            var valid = rule.validate(field.value);
-            field.classList.toggle('invalid', !valid);
-            if (errEl) errEl.classList.toggle('visible', !valid);
-          }
+          if (!field.classList.contains('invalid')) return;
+          var errEl = document.getElementById(rule.errId);
+          var valid  = rule.validate(field.value);
+          field.classList.toggle('invalid', !valid);
+          if (errEl) errEl.classList.toggle('visible', !valid);
         });
       });
 
+      /* Submit handler */
       form.addEventListener('submit', function (e) {
         e.preventDefault();
+
+        /* Hide any previous banner */
+        if (banner) banner.style.display = 'none';
+
+        /* Client-side validation gate */
         if (!validateAll()) return;
-        btn.disabled = true;
+
+        /* Disable button + show loading state */
+        btn.disabled    = true;
         btn.textContent = 'Sending…';
+
         fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
+          method:  'POST',
+          body:    new FormData(form),
           headers: { 'Accept': 'application/json' }
         })
-        .then(function (res) {
-          if (res.ok) {
-            window.location.href = '/1-1/thank-you.html';
-          } else {
-            return res.json().then(function (data) {
-              throw new Error(data.error || 'Submission failed');
-            });
-          }
-        })
-        .catch(function (err) {
-          btn.disabled = false;
-          btn.textContent = 'Book a Free Consultation';
-          alert('Something went wrong: ' + err.message + '. Please try again.');
-        });
+          .then(function (res) {
+            if (res.ok) {
+              /* Success → redirect to thank-you page */
+              window.location.href = '/1-1/thank-you.html';
+            } else {
+              /* Non-2xx from Formspree → throw generic, not the raw API message */
+              throw new Error('server_error');
+            }
+          })
+          .catch(function () {
+            /* Re-enable button */
+            btn.disabled    = false;
+            btn.textContent = 'Book a Free Consultation';
+
+            /* Show inline branded error banner instead of alert() */
+            if (banner) {
+              banner.textContent = 'Something went wrong on our end. Please try again in a moment, or email us directly.';
+              banner.style.display = 'block';
+              banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          });
       });
     })();
   </script>
 
-  <!-- Scroll reveal -->
+  <!-- ── Scroll-reveal (IntersectionObserver) ── -->
   <script>
     (function () {
       var sections = document.querySelectorAll('.scroll-section');
