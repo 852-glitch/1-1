@@ -42,7 +42,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 30%;
+      /* Show full globe: anchor bottom so kids stay at the banner, globe visible above */
+      object-position: center bottom;
       z-index: 0;
     }
 
@@ -51,12 +52,12 @@
       inset: 0;
       background: linear-gradient(
         to bottom,
-        rgba(10, 15, 28, 0.50) 0%,
-        rgba(10, 15, 28, 0.15) 25%,
-        rgba(10, 15, 28, 0.08) 45%,
-        rgba(10, 15, 28, 0.20) 65%,
-        rgba(10, 15, 28, 0.78) 88%,
-        rgba(10, 15, 28, 0.92) 100%
+        rgba(10, 15, 28, 0.45) 0%,
+        rgba(10, 15, 28, 0.10) 20%,
+        rgba(10, 15, 28, 0.05) 45%,
+        rgba(10, 15, 28, 0.15) 65%,
+        rgba(10, 15, 28, 0.70) 88%,
+        rgba(10, 15, 28, 0.90) 100%
       );
       z-index: 1;
     }
@@ -460,11 +461,31 @@
       'Pre-Trade Rituals',
       'Systematic Execution',
     ];
-    const DOT = ' · ';
+    const SEP = '   ·   '; // separator between items — spaces prevent overlap
 
     let tickerX   = 0;   // current scroll offset in px
     let tickerW   = 0;   // total width of one copy of the text strip
     let lastDrawT = -1;
+    // Pre-measured item widths cache
+    let measuredWidths = null;
+    let measuredSepWidth = 0;
+    let measuredFs = 0;
+
+    function measureItems(fs) {
+      // Only re-measure when font size changes
+      if (measuredFs === fs && measuredWidths) return;
+      measuredFs = fs;
+      bgCtx.font = `600 ${fs}px 'Space Grotesk', 'Inter', sans-serif`;
+      measuredSepWidth = bgCtx.measureText(SEP).width;
+      measuredWidths = ITEMS.map(item => bgCtx.measureText(item).width);
+      // Compute total strip width
+      let total = 0;
+      ITEMS.forEach((item, i) => {
+        if (i > 0) total += measuredSepWidth;
+        total += measuredWidths[i];
+      });
+      tickerW = total;
+    }
 
     function drawBg(timestamp) {
       const dpr = renderer.getPixelRatio();
@@ -474,7 +495,8 @@
       if (bgCanvas.width !== w || bgCanvas.height !== h) {
         bgCanvas.width  = w;
         bgCanvas.height = h;
-        tickerW = 0; // force recalc
+        tickerW = 0;
+        measuredWidths = null; // force re-measure
       }
 
       // Dark background matching site
@@ -490,21 +512,16 @@
       bgCtx.fillStyle = grd;
       bgCtx.fillRect(0, 0, w, h);
 
-      // Text
-      const fs   = Math.round(h * 0.36);
+      // Font setup
+      const fs = Math.round(h * 0.36);
       bgCtx.font = `600 ${fs}px 'Space Grotesk', 'Inter', sans-serif`;
       bgCtx.textBaseline = 'middle';
       bgCtx.textAlign    = 'left';
 
-      const full = ITEMS.map((t, i) => (i > 0 ? DOT : '') + t).join('');
-      const fullDot = full + DOT;
+      // Measure all items once at this font size
+      measureItems(fs);
 
-      // Measure total width once
-      if (tickerW === 0) {
-        tickerW = bgCtx.measureText(fullDot).width;
-      }
-
-      // Scroll: advance by ~50px/s in canvas-px
+      // Scroll: advance ~50px/s in canvas-px
       if (lastDrawT >= 0 && timestamp !== undefined) {
         const dt = timestamp - lastDrawT;
         tickerX -= (50 * dpr) * (dt / 1000);
@@ -512,33 +529,27 @@
       }
       lastDrawT = timestamp || 0;
 
-      // Draw two copies so it wraps seamlessly
+      // Draw enough copies to fill the canvas width
       const y = h * 0.5;
-      let x = tickerX;
-      // Draw enough copies to fill width
+      let startX = tickerX;
+      // Ensure we start far enough left that the strip fills from before the left edge
+      while (startX > 0) startX -= tickerW;
+
+      let x = startX;
       while (x < w + tickerW) {
         let cx = x;
         ITEMS.forEach((item, i) => {
-          const prefix = i > 0 ? DOT : '';
-          // dot separator in muted color
+          // Separator
           if (i > 0) {
-            bgCtx.fillStyle = 'rgba(255,255,255,0.20)';
-            bgCtx.fillText(DOT, cx, y);
-            cx += bgCtx.measureText(DOT).width;
+            bgCtx.fillStyle = 'rgba(255,255,255,0.22)';
+            bgCtx.fillText(SEP, cx, y);
+            cx += measuredSepWidth;
           }
-          // dot bullet
-          const dotR = Math.round(h * 0.07);
-          bgCtx.fillStyle = '#10b981';
-          bgCtx.beginPath();
-          bgCtx.arc(cx + dotR, y, dotR, 0, Math.PI * 2);
-          bgCtx.fill();
-          cx += dotR * 2 + Math.round(h * 0.07);
-
-          // Highlight numbers/keywords
-          const isHighlight = /^\d|\bFree\b|\bNo\b/.test(item);
-          bgCtx.fillStyle = isHighlight ? '#10b981' : 'rgba(255,255,255,0.52)';
+          // Item text — highlight numbers & key words
+          const isHighlight = /^\d|^Free$|^No/.test(item);
+          bgCtx.fillStyle = isHighlight ? '#10b981' : 'rgba(255,255,255,0.78)';
           bgCtx.fillText(item, cx, y);
-          cx += bgCtx.measureText(item).width;
+          cx += measuredWidths[i];
         });
         x += tickerW;
       }
@@ -566,7 +577,7 @@
       const d = {
         id: uid++, x, y, r, area,
         vx: vx !== undefined ? vx : Math.cos(angle) * spd,
-        vy: vy !== undefined ? vy : Math.sin(angle) * spd * 0.3, // mostly horizontal
+        vy: vy !== undefined ? vy : Math.sin(angle) * spd * 0.3,
         alive: true,
         wanderAngle: Math.random() * Math.PI * 2,
         wanderSpeed: 0.3 + Math.random() * 0.5,
@@ -679,7 +690,7 @@ void main(){
 }
 `;
 
-    let mat; // defined after resize
+    let mat;
     function buildMaterial() {
       mat = new THREE.ShaderMaterial({
         vertexShader: vertSrc,
