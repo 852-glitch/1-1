@@ -34,17 +34,36 @@
       justify-content: flex-start;
       align-items: stretch;
       overflow: hidden;
+      /* Scene background colour so no black bars show when video uses contain */
+      background-color: #0e1420;
+    }
+
+    /* Video wrapper — fills the hero but lets us scale the video independently */
+    .hero-video-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      /* Anchor to bottom so kids always sit at the banner */
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
     }
 
     .hero-video {
-      position: absolute;
-      inset: 0;
+      /*
+        Use contain so the entire globe is visible (no cropping).
+        The video is then scaled UP slightly so it fills the full width
+        while still showing the complete composition from top to bottom.
+        transform-origin: bottom center keeps kids pinned at the banner.
+      */
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      /* Show full globe: anchor bottom so kids stay at the banner, globe visible above */
+      object-fit: contain;
       object-position: center bottom;
-      z-index: 0;
+      /* Scale down just enough to ensure the full globe top is visible */
+      transform: scale(1.0);
+      transform-origin: center bottom;
     }
 
     .hero-overlay {
@@ -53,10 +72,10 @@
       background: linear-gradient(
         to bottom,
         rgba(10, 15, 28, 0.45) 0%,
-        rgba(10, 15, 28, 0.10) 20%,
-        rgba(10, 15, 28, 0.05) 45%,
-        rgba(10, 15, 28, 0.15) 65%,
-        rgba(10, 15, 28, 0.70) 88%,
+        rgba(10, 15, 28, 0.08) 20%,
+        rgba(10, 15, 28, 0.03) 45%,
+        rgba(10, 15, 28, 0.12) 65%,
+        rgba(10, 15, 28, 0.68) 88%,
         rgba(10, 15, 28, 0.90) 100%
       );
       z-index: 1;
@@ -100,14 +119,12 @@
       overflow: hidden;
       border-top: 1px solid rgba(255, 255, 255, 0.10);
     }
-    /* The canvas fills the banner fully */
     #liquid-banner {
       display: block;
       width: 100%;
       height: 100%;
       cursor: crosshair;
     }
-    /* "drag · click" hint */
     .banner-hint {
       position: absolute;
       right: 1rem;
@@ -172,17 +189,18 @@
   <!-- ── Hero ── -->
   <section class="hero-section">
 
-    <!-- Looping video background -->
-    <video
-      class="hero-video"
-      src="https://cdn.midjourney.com/video/9d14ae5b-8c52-4c6c-a781-1ff1a03bb805/0.mp4"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="auto"
-      aria-hidden="true"
-    ></video>
+    <!-- Video wrapper — zoom-out with contain, anchored bottom -->
+    <div class="hero-video-wrap" aria-hidden="true">
+      <video
+        class="hero-video"
+        src="https://cdn.midjourney.com/video/9d14ae5b-8c52-4c6c-a781-1ff1a03bb805/0.mp4"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+      ></video>
+    </div>
 
     <!-- Overlay -->
     <div class="hero-overlay" aria-hidden="true"></div>
@@ -412,14 +430,12 @@
   <script type="module">
     import * as THREE from "https://unpkg.com/three@0.160.1/build/three.module.js";
 
-    /* ─── Constants ─────────────────────────────────────── */
     const MAX_DROPLETS = 28;
     const FIXED_DT_MS  = 8;
     const MAX_FRAME_DT = 100;
     const MAX_CATCHUP  = 6;
     const MAX_ENTRIES  = MAX_DROPLETS * 2;
 
-    /* ─── Canvas / Renderer ──────────────────────────────── */
     const canvas = document.getElementById('liquid-banner');
     const wrap   = canvas.parentElement;
 
@@ -441,14 +457,12 @@
     const scene  = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-    /* ─── Background canvas (scrolling ticker text) ──────── */
     const bgCanvas  = document.createElement('canvas');
     const bgCtx     = bgCanvas.getContext('2d');
     const bgTexture = new THREE.CanvasTexture(bgCanvas);
     bgTexture.minFilter = THREE.LinearFilter;
     bgTexture.magFilter = THREE.LinearFilter;
 
-    // Ticker items
     const ITEMS = [
       '500+ Investors Mentored',
       '7+ Years Experience',
@@ -461,24 +475,21 @@
       'Pre-Trade Rituals',
       'Systematic Execution',
     ];
-    const SEP = '   ·   '; // separator between items — spaces prevent overlap
+    const SEP = '   \u00b7   ';
 
-    let tickerX   = 0;   // current scroll offset in px
-    let tickerW   = 0;   // total width of one copy of the text strip
+    let tickerX   = 0;
+    let tickerW   = 0;
     let lastDrawT = -1;
-    // Pre-measured item widths cache
     let measuredWidths = null;
     let measuredSepWidth = 0;
     let measuredFs = 0;
 
     function measureItems(fs) {
-      // Only re-measure when font size changes
       if (measuredFs === fs && measuredWidths) return;
       measuredFs = fs;
       bgCtx.font = `600 ${fs}px 'Space Grotesk', 'Inter', sans-serif`;
       measuredSepWidth = bgCtx.measureText(SEP).width;
       measuredWidths = ITEMS.map(item => bgCtx.measureText(item).width);
-      // Compute total strip width
       let total = 0;
       ITEMS.forEach((item, i) => {
         if (i > 0) total += measuredSepWidth;
@@ -496,14 +507,12 @@
         bgCanvas.width  = w;
         bgCanvas.height = h;
         tickerW = 0;
-        measuredWidths = null; // force re-measure
+        measuredWidths = null;
       }
 
-      // Dark background matching site
       bgCtx.fillStyle = 'rgba(8,12,22,0.96)';
       bgCtx.fillRect(0, 0, w, h);
 
-      // Subtle left→right blue-green glow
       const grd = bgCtx.createLinearGradient(0, 0, w, 0);
       grd.addColorStop(0,    'rgba(16,40,80,0.5)');
       grd.addColorStop(0.35, 'rgba(10,60,70,0.4)');
@@ -512,16 +521,13 @@
       bgCtx.fillStyle = grd;
       bgCtx.fillRect(0, 0, w, h);
 
-      // Font setup
       const fs = Math.round(h * 0.36);
       bgCtx.font = `600 ${fs}px 'Space Grotesk', 'Inter', sans-serif`;
       bgCtx.textBaseline = 'middle';
       bgCtx.textAlign    = 'left';
 
-      // Measure all items once at this font size
       measureItems(fs);
 
-      // Scroll: advance ~50px/s in canvas-px
       if (lastDrawT >= 0 && timestamp !== undefined) {
         const dt = timestamp - lastDrawT;
         tickerX -= (50 * dpr) * (dt / 1000);
@@ -529,23 +535,19 @@
       }
       lastDrawT = timestamp || 0;
 
-      // Draw enough copies to fill the canvas width
       const y = h * 0.5;
       let startX = tickerX;
-      // Ensure we start far enough left that the strip fills from before the left edge
       while (startX > 0) startX -= tickerW;
 
       let x = startX;
       while (x < w + tickerW) {
         let cx = x;
         ITEMS.forEach((item, i) => {
-          // Separator
           if (i > 0) {
             bgCtx.fillStyle = 'rgba(255,255,255,0.22)';
             bgCtx.fillText(SEP, cx, y);
             cx += measuredSepWidth;
           }
-          // Item text — highlight numbers & key words
           const isHighlight = /^\d|^Free$|^No/.test(item);
           bgCtx.fillStyle = isHighlight ? '#10b981' : 'rgba(255,255,255,0.78)';
           bgCtx.fillText(item, cx, y);
@@ -557,7 +559,6 @@
       bgTexture.needsUpdate = true;
     }
 
-    /* ─── Droplet buffer ─────────────────────────────────── */
     const dropletBuf = new Float32Array(MAX_ENTRIES * 4);
     const dropletTex = new THREE.DataTexture(
       dropletBuf, MAX_ENTRIES, 1, THREE.RGBAFormat, THREE.FloatType
@@ -589,7 +590,6 @@
       return d;
     }
 
-    // Seed
     for (let i = 0; i < 10; i++) {
       spawn(
         (Math.random() - 0.5) * 1.6 * aspect,
@@ -598,7 +598,6 @@
       );
     }
 
-    /* ─── Shader ─────────────────────────────────────────── */
     const vertSrc = `void main(){ gl_Position = vec4(position, 1.0); }`;
 
     const fragSrc = `
@@ -705,7 +704,6 @@ void main(){
       scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), mat));
     }
 
-    /* ─── Input ──────────────────────────────────────────── */
     const mouse = { x: 999, y: 0, active: false, down: false };
     let spawnCD = 0;
 
@@ -723,7 +721,6 @@ void main(){
 
     window.addEventListener('resize', resize);
 
-    /* ─── Physics ────────────────────────────────────────── */
     const DAMP         = 0.993;
     const MOUSE_R      = 0.16;
     const MOUSE_F      = 0.005;
@@ -868,12 +865,10 @@ void main(){
       mat.uniforms.uCount.value=n*2;
     }
 
-    /* ─── Init ───────────────────────────────────────────── */
     resize();
     buildMaterial();
     drawBg(0);
 
-    /* ─── Main loop ──────────────────────────────────────── */
     let last=performance.now(), acc=0, paused=false;
     document.addEventListener('visibilitychange', () => {
       paused=document.hidden; if(!paused) last=performance.now();
